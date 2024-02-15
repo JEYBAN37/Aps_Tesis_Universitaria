@@ -91,50 +91,50 @@ TYPE_ID = [
 ##
 
 OPTIONS_SW = [
-    ('1', 'Concreto'),
-    ('2', 'Teja de Barro'),
-    ('3', 'Fibrocemento'),
-    ('4', 'Zinc'),
-    ('5', 'Palma o Paja'),
-    ('6', 'Plastico'),
+    ('1', 'Recolección por parte del servicio de aseo distrital o municipal'),
+    ('2', 'Enterramiento'),
+    ('3', 'Quema a campo abierto'),
+    ('4', 'Disposición en fuentes de agua cercana'),
+    ('5', 'Disposición a campo abierto'),
+    ('6', 'Otro'),
 ]
 
 OPTIONS_W = [
-    ('1', 'Concreto'),
-    ('2', 'Teja de Barro'),
-    ('3', 'Fibrocemento'),
-    ('4', 'Zinc'),
-    ('5', 'Palma o Paja'),
-    ('6', 'Plastico'),
-    ('7', 'Desechos (cartón, lata, tela, sacos, etc)')
+    ('1', 'Alcantarillado'),
+    ('2', 'Pozo séptico'),
+    ('3', 'Campo de oxidación'),
+    ('4', 'Biofiltro'),
+    ('5', 'Fuente hídrica'),
+    ('6', 'Campo abierto'),
+    ('7', 'Otro')
 ]
 
 OPTIONS_DS = [
-    ('1', 'Concreto'),
-    ('2', 'Teja de Barro'),
-    ('3', 'Fibrocemento'),
-    ('4', 'Zinc'),
-    ('5', 'Palma o Paja'),
-    ('6', 'Plastico'),
-    ('7', 'Desechos (cartón, lata, tela, sacos, etc)'),
+    ('1', 'Sanitario conectado al alcantarillado'),
+    ('2', 'Sanitario y letrina'),
+    ('3', 'Sanitario conectado a pozo séptico'),
+    ('4', 'Sanitario ecológico seco'),
+    ('5', 'Sanitario sin conexión'),
+    ('6', 'Sanitario con disposición a fuente hídrica'),
+    ('7', 'Campo abierto'),
     ('8', 'Otro')
 ]
 
 
 OPTIONS_SS = [
-    ('1', 'Concreto'),
-    ('2', 'Teja de Barro'),
-    ('3', 'Fibrocemento'),
-    ('4', 'Zinc'),
-    ('5', 'Palma o Paja'),
-    ('6', 'Plastico'),
-    ('7', 'Desechos (cartón, lata, tela, sacos, etc)'),
-    ('8', 'Otro'),
-    ('9', 'Concreto'),
-    ('10', 'Teja de Barro'),
-    ('11', 'Fibrocemento'),
-    ('12', 'Zinc'),
-    ('13', 'Palma o Paja')
+    ('1', 'Acueducto administrado por empresa prestadora (ESP)'),
+    ('2', 'Agua embotellada o en bolsa'),
+    ('3', 'Acueducto veredal o comunitario'),
+    ('4', 'Pila pública'),
+    ('5', 'Carro tanque'),
+    ('6', 'Abasto con distribución comunitaria'),
+    ('7', 'Pozo con bomba'),
+    ('8', 'Pozo sin bomba, aljibe, jagüey o barreno'),
+    ('9', 'Laguna o jagüey'),
+    ('10', 'Río, quebrada, manantial o nacimiento'),
+    ('11', 'Aguas lluvias'),
+    ('12', 'Aguatero'),
+    ('13', 'Otro')
 ]
 
 OPTIONS_A = [

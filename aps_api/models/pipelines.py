@@ -8,3 +8,5 @@ class Pipelines(models.Model):
     entity = models.ForeignKey(ChannelEntity, on_delete=models.CASCADE)
     person = models.ForeignKey(Member, on_delete=models.CASCADE)
     channel = models.CharField(max_length=150)
+    state = models.IntegerField(choices=Enums.OPTIONS_SW)
+#  Esta Revisado

@@ -18,4 +18,5 @@ class Family(models.Model):
     carer = models.IntegerField(choices=Enums.OPTIONS_YN)  # 28
     zarit = models.IntegerField(choices=Enums.OPTIONS_ZT, null=True)  # 29
     ecomapa = models.IntegerField(choices=Enums.OPTIONS_ECO)  # 30
+    number_family = models.CharField(max_length=60)  # 83 Revisar Nomenclatura dicha por el Cliente
 # Esta Revisado
