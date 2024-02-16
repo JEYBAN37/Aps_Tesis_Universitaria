@@ -1,10 +1,8 @@
 from django.db import models
-from .channelEntity import ChannelEntity
 
 
 class Representative(models.Model):
     serial_id = models.AutoField(primary_key=True)
-    entity = models.ForeignKey(ChannelEntity, on_delete=models.CASCADE)
     name = models.CharField(max_length=250)
     last_name = models.CharField(max_length=250)
     id = models.CharField(max_length=15)  # 17

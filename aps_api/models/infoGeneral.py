@@ -1,13 +1,12 @@
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from .pollster import Pollster
-from .housing import Housing
+
 from aps_api.resources import Enums
 
 
 class InfoGeneral(models.Model):
     serial_id = models.AutoField(primary_key=True)
-    housing = models.OneToOneField(Housing, on_delete=models.CASCADE)
     type_register = models.IntegerField(default=1)  # 0
     number_register = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(10)])  # 1
     consent = models.IntegerField(choices=Enums.OPTIONS_YN)  # 2

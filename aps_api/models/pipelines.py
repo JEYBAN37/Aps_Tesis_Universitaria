@@ -1,6 +1,7 @@
 from django.db import models
 from .channelEntity import ChannelEntity
 from .member import Member
+from aps_api.resources import Enums
 
 
 class Pipelines(models.Model):

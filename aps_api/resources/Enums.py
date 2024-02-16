@@ -297,12 +297,12 @@ OPTIONS_PI = [
 ]
 
 OPTIONS_STR = [
-    ('1', 'Bajo bajo'),
-    ('2', 'Bajo'),
-    ('3', 'Medio-bajo'),
-    ('4', 'Medio'),
-    ('5', 'Medio-alto'),
-    ('6', 'Alto'),
+    (1, 'Bajo bajo'),
+    (2, 'Bajo'),
+    (3, 'Medio-bajo'),
+    (4, 'Medio'),
+    (5, 'Medio-alto'),
+    (6, 'Alto')
 ]
 
 OPTIONS_ECO = [
@@ -320,8 +320,8 @@ OPTIONS_ZT = [
 ]
 
 OPTIONS_YN = [
-    ('1', 'Si'),
-    ('2', 'No'),
+    (1, 'Si'),
+    (2, 'No'),
 ]
 
 OPTIONS_APGAR = [

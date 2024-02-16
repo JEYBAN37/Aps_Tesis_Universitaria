@@ -1,10 +1,12 @@
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
+from .infoGeneral import InfoGeneral
 from aps_api.resources import Enums
 
 
 class Housing(models.Model):
     serial_id = models.AutoField(primary_key=True)
+    info_general = models.OneToOneField(InfoGeneral, on_delete=models.CASCADE)
     home_type = models.IntegerField(choices=Enums.OPTIONS_HT)  # 54
     ht_descripcion = models.CharField(max_length=30, null=True, blank=True)  # 55
     structural_material = models.IntegerField(choices=Enums.OPTIONS_SM)  # 56

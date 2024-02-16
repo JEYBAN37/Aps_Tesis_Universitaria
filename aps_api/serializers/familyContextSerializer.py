@@ -6,3 +6,4 @@ class FamilySerializer(serializers.ModelSerializer):
     class Meta:
         model = FamilyContext
         fields = '__all__'
+

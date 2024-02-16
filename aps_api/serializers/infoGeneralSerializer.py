@@ -1,8 +1,10 @@
 from rest_framework import serializers
-from aps_api.models import InfoGeneral
+from aps_api.models.infoGeneral import InfoGeneral
 
 
-class InfoSociambientalSerializer(serializers.ModelSerializer):
+class InfoGeneralSerializer(serializers.ModelSerializer):
     class Meta:
         model = InfoGeneral
         fields = '__all__'
+
+
