@@ -1,33 +1,90 @@
+from wsgiref import headers
 # views.py
+from rest_framework.decorators import api_view
+from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
-from rest_framework import status, generics
-from aps_api.models.infoGeneral import InfoGeneral
 from aps_api.models.pollster import Pollster
+from aps_api.models.infoGeneral import InfoGeneral
 from aps_api.serializers.infoGeneralSerializer import InfoGeneralSerializer
+from rest_framework import serializers
+from rest_framework import status
 
 
 def pollster_exists(pollster_id):
     return Pollster.objects.filter(serial_id=pollster_id).exists()
 
 
-class SociambientalCreate (generics.CreateAPIView):
-    queryset = InfoGeneral.objects.all()
-    serializer_class = InfoGeneralSerializer
+def pollster_exists_info_general(pollster_id):
+    return InfoGeneral.objects.filter(pollster=pollster_id).exists()
 
-    def create(self, request, *args, **kwargs):
-        pollster_id = request.data.get('pollster')
-        print(pollster_id)
-        try:
-            pollster_id = int(request.data.get('pollster'))
-        except ValueError:
-            return Response({"Error": "ID de Encuestador no es un número entero válido"},
-                            status=status.HTTP_400_BAD_REQUEST)
 
-        if not pollster_exists(pollster_id):
-            return Response({"error": f"El Encuestador con ID {pollster_id} no existe"},
-                            status=status.HTTP_400_BAD_REQUEST)
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        self.perform_create(serializer)
-        headers = self.get_success_headers(serializer.data)
-        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+@api_view(['POST'])
+def add_items(request):
+    item = InfoGeneralSerializer(data=request.data)
+    pollster_id = request.data.get('pollster')
+    try:
+        pollster_id = int(pollster_id)
+    except ValueError:
+        return Response({"Error": "ID de Encuestador no es un número entero válido"},
+                        status=status.HTTP_400_BAD_REQUEST)
+
+    if not pollster_exists(pollster_id):
+        return Response({"error": f"El Encuestador con ID {pollster_id} no existe"},
+                        status=status.HTTP_400_BAD_REQUEST)
+    if InfoGeneral.objects.filter(**request.data).exists():
+        raise serializers.ValidationError('This data already exists')
+
+    if item.is_valid():
+        item.save()
+        return Response(item.data, status=status.HTTP_201_CREATED)
+    else:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+
+@api_view(['GET'])
+def view_items(request):
+    try:
+        pollster_id = request.query_params.get('pollster')
+        if pollster_id is not None and pollster_id is not pollster_exists(pollster_id):
+            pollster_id = int(pollster_id)
+            items = InfoGeneral.objects.filter(pollster=int(pollster_id))
+        elif pollster_id is None:
+            items = InfoGeneral.objects.all()
+        else:
+            return Response({"Error": "No se puede encontrar el registro"}, status=status.HTTP_404_NOT_FOUND)
+
+        if items:
+            serializer = InfoGeneralSerializer(items, many=True)
+            return Response(serializer.data)
+        else:
+            return Response({"Error": "No existe registros"}, status=status.HTTP_404_NOT_FOUND)
+
+    except ValueError:
+        return Response({"Error": "Accion ilegal en el sistema"},
+                        status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['POST'])
+def update_items(request, serial_id):
+    item = InfoGeneral.objects.get(serial_id=serial_id)
+    data = InfoGeneralSerializer(instance=item, data=request.data)
+
+    if data.is_valid():
+        data.save()
+        return Response(data.data)
+    else:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+
+@api_view(['DELETE'])
+def delete_items(request, serial_id):
+    item = get_object_or_404(InfoGeneral, serial_id=serial_id)
+    item.delete()
+    return Response(status=status.HTTP_202_ACCEPTED)
+
+
+
+
+
+
+
