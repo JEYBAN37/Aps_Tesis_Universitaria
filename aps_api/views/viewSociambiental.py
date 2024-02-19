@@ -14,10 +14,6 @@ def pollster_exists(pollster_id):
     return Pollster.objects.filter(serial_id=pollster_id).exists()
 
 
-def pollster_exists_info_general(pollster_id):
-    return InfoGeneral.objects.filter(pollster=pollster_id).exists()
-
-
 @api_view(['POST'])
 def add_items(request):
     item = InfoGeneralSerializer(data=request.data)
@@ -25,12 +21,10 @@ def add_items(request):
     try:
         pollster_id = int(pollster_id)
     except ValueError:
-        return Response({"Error": "ID de Encuestador no es un número entero válido"},
-                        status=status.HTTP_400_BAD_REQUEST)
+        return Response(item.errors, status=status.HTTP_400_BAD_REQUEST)
 
     if not pollster_exists(pollster_id):
-        return Response({"error": f"El Encuestador con ID {pollster_id} no existe"},
-                        status=status.HTTP_400_BAD_REQUEST)
+        return Response(item.errors, status=status.HTTP_400_BAD_REQUEST)
     if InfoGeneral.objects.filter(**request.data).exists():
         raise serializers.ValidationError('This data already exists')
 
@@ -38,13 +32,14 @@ def add_items(request):
         item.save()
         return Response(item.data, status=status.HTTP_201_CREATED)
     else:
-        return Response(status=status.HTTP_404_NOT_FOUND)
+        return Response(item.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['GET'])
 def view_items(request):
     try:
         pollster_id = request.query_params.get('pollster')
+        print(pollster_id)
         if pollster_id is not None and pollster_id is not pollster_exists(pollster_id):
             pollster_id = int(pollster_id)
             items = InfoGeneral.objects.filter(pollster=int(pollster_id))
