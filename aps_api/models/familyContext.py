@@ -1,9 +1,11 @@
 from django.db import models
 from aps_api.resources import Enums
+from .family import Family
 
 
 class FamilyContext(models.Model):
     serial_id = models.AutoField(primary_key=True)
+    family = models.OneToOneField(Family, on_delete=models.CASCADE)
     younger = models.IntegerField(choices=Enums.OPTIONS_YN)  # 31
     pregnant = models.IntegerField(choices=Enums.OPTIONS_YN)  # 22
     senior = models.IntegerField(choices=Enums.OPTIONS_YN)  # 33
