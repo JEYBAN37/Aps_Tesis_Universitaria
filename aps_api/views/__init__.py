@@ -3,3 +3,4 @@ from aps_api.views import viewVivienda
 from aps_api.views import viewFamilia
 from aps_api.views import viewFamilyContext
 from aps_api.views import viewBienestar
+from aps_api.views import viewSaneamiento

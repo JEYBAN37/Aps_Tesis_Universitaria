@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import viewVivienda, viewInfoGeneral, viewFamilia, viewFamilyContext, viewBienestar
+from .views import viewVivienda, viewInfoGeneral, viewFamilia, viewFamilyContext, viewBienestar, viewSaneamiento
 
 urlpatterns = [
     #  path('pollster/', Viewpollster.as_view(), name='page_pollster'),
@@ -29,4 +29,9 @@ urlpatterns = [
     path('bienestar/', viewBienestar.view_items, name='add-items'),
     path('bienestar/update/<int:serial_id>/', viewBienestar.update_items, name='update-items'),
     path('bienestar/<int:serial_id>/delete/', viewBienestar.delete_items, name='delete-items'),
+
+    path('saneamiento/add/', viewSaneamiento.add_items, name='add-items'),
+    path('saneamiento/', viewSaneamiento.view_items, name='view_items'),
+    path('saneamiento/update/<int:serial_id>/', viewSaneamiento.update_items, name='update-items'),
+    path('saneamiento/<int:serial_id>/delete/', viewSaneamiento.delete_items, name='delete-items'),
 ]
